@@ -1,6 +1,7 @@
 package edu.asu.diging.tutorial.spring.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -13,41 +14,33 @@ import edu.asu.diging.tutorial.spring.domain.Mood;
 @Service
 public class MoodService implements IMoodService {
 	
-	private List<String> moods;
-	private Random random;
-	private List<String> explanations;
-	
+	private List<String> moods = new ArrayList<String>();
+	private HashMap<String,String> explanation = new HashMap<String,String>();
+    private Random random;
+    
 	@PostConstruct
-	public void init() {
-		moods = new ArrayList<String>();
+	public void init(){
+		
 		moods.add("happy");
-		moods.add("sad");
-		moods.add("bubbly");
-		moods.add("frustrated");
-		moods.add("scared");
+		moods.add("Sad");
+		moods.add("cranky");
 		moods.add("excited");
 		
-		explanations = new ArrayList<String>();
-		explanations.add("I am hungry.");
-		explanations.add("there were no mice.");
-		explanations.add("there were mice.");
-		explanations.add("I am purring.");
-		explanations.add("life is not a pony farm.");
+		explanation.put("happy", "I got a good grade in Computation Humanities");
+		explanation.put("Sad", "I missed my flight");
+		explanation.put("Cranky","My GF is mad at me");
+		explanation.put("excited","It's a weekend");
 		
-		random = new Random(); 
+		random = new Random();	
 	}
-
-	/* (non-Javadoc)
-	 * @see edu.asu.diging.tutorial.spring.one.service.IMoodService#getCurrentMood()
-	 */
-	public Mood getCurrentMood() {
-		int randomInt = random.nextInt(moods.size());
-		return new Mood(moods.get(randomInt));
-    }
 	
 	@Override
-	public String getExplanation() {
-		int randomInt = random.nextInt(explanations.size());
-		return explanations.get(randomInt);
-	}
+	public Mood getCurrentMood(){
+		return new Mood(moods.get(random.nextInt(moods.size())));
+	}	
+	
+	@Override
+	public String getExplanation(String mood){	
+		return explanation.get(mood);
+	}	
 }

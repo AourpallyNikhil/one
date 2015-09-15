@@ -3,7 +3,18 @@
 
 <html>
 <body>
-<h2>So you want to know why...</h2>
+<head>
+<style>
+h2 {
+    background-color:blue;
+    color:white;
+    text-align:center;
+    padding:5px;
+}
+</style>
+</head>
+
+<h2>Here is the reason</h2>
 
 I am feeling ${ mood } because ${explanation}
 
